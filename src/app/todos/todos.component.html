@@ -4,31 +4,19 @@
       <div class="todolist not-done">
         <h1>Todos</h1>
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for...">
+          <input  [(ngModel)]="todo" class="form-control" placeholder="todo">
           <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">Add a TODO</button>
+                        <button class="btn btn-primary" type="button" (click)="addAToDo()">Add a TODO</button>
                     </span>
         </div>
         <!-- /input-group -->
         <button id="checkAll" class="btn btn-success">Mark all as done</button>
         <hr>
         <ul id="sortable" class="list-unstyled">
-          <li class="ui-state-default">
+          <li class="ui-state-default" *ngFor="let todo of todos">
             <div class="checkbox">
               <label>
-                                <input type="checkbox" value="" />Take out the trash</label>
-            </div>
-          </li>
-          <li class="ui-state-default">
-            <div class="checkbox">
-              <label>
-                                <input type="checkbox" value="" />Buy bread</label>
-            </div>
-          </li>
-          <li class="ui-state-default">
-            <div class="checkbox">
-              <label>
-                                <input type="checkbox" value="" />Teach penguins to fly</label>
+                <input type="checkbox" value="" />{{todo.todoName}}</label>
             </div>
           </li>
         </ul>
