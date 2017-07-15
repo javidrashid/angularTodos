@@ -21,12 +21,17 @@ import { TodoService } from "./todos.service"
 
 export class TodosComponent implements OnInit {
     todos : Todo[];
+    todo: any
+    todoName: string;
+
     constructor(private _todosService : TodoService) {}
 
     ngOnInit() : void{
         this.todos = this._todosService.getTodos();
     }
-    addAToDo(todo: string) : void {
-        console.log("e");
+    addAToDo(todo: Todo[]) : void {
+        console.log(this.todos);
+        console.log({todoName : this.todo});
+        this.todos.push({todoName: this.todo});
     }
 }

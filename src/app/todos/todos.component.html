@@ -6,7 +6,7 @@
         <div class="input-group">
           <input  [(ngModel)]="todo" class="form-control" placeholder="todo">
           <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" (click)="addAToDo()">Add a TODO</button>
+                        <button class="btn btn-primary" type="button" (click)="addAToDo(todoText)">Add a TODO</button>
                     </span>
         </div>
         <!-- /input-group -->
@@ -16,7 +16,7 @@
           <li class="ui-state-default" *ngFor="let todo of todos">
             <div class="checkbox">
               <label>
-                <input type="checkbox" value="" />{{todo.todoName}}</label>
+                <input #todoName type="checkbox" value="" />{{todo.todoName}}</label>
             </div>
           </li>
         </ul>
