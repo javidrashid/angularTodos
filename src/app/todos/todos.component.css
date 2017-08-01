@@ -40,3 +40,10 @@ li.ui-state-default:last-child{
 #checkAll{
     margin-top:10px;
 }
+
+.app-content {
+  padding: 20px;
+}
+.app-content md-card {
+  margin: 20px;
+}

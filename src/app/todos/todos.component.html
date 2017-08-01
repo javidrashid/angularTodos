@@ -1,4 +1,44 @@
+
 <div class="container">
+    <div class="app-content">
+  <md-card>
+    <button md-button>FLAT</button>
+    <button md-raised-button>RAISED</button>
+  </md-card>
+  <md-card>
+    <button md-icon-button>
+      <md-icon class="md-24">favorite</md-icon>
+    </button>
+    <button md-fab>
+      <md-icon class="md-24">add</md-icon>
+    </button>
+    <button md-mini-fab>
+      <md-icon class="md-24">add</md-icon>
+    </button>
+  </md-card>
+  <md-card>
+    <button md-raised-button color="primary">PRIMARY</button>
+    <button md-raised-button color="accent">ACCENT</button>
+    <button md-raised-button color="warn">WARN</button>
+  </md-card>
+  <md-card>
+    <button md-button disabled>OFF</button>
+    <button md-raised-button disabled>OFF</button>
+    <button md-mini-fab disabled><md-icon>check</md-icon></button>
+  </md-card>
+</div>
+<hr><hr><hr><hr><hr><hr><hr><hr>
+<!-- -->
+  <md-card>
+    <form class="example-form">
+    <md-input-container class="example-full-width">
+    <input  placeholder="Email">
+   
+  </md-input-container>
+</form>
+
+
+  </md-card>
   <div class="row todolist-container">
     <div class="col-md-12">
       <div class="todolist not-done">
@@ -6,17 +46,17 @@
         <div class="input-group">
           <input  [(ngModel)]="todo" class="form-control" placeholder="todo">
           <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" (click)="addAToDo(todoText)">Add a TODO + "{{remainingTodos}}" + {{2+6}}</button>
+                        <button class="btn btn-primary" type="button" (click)="addAToDo(todoText)">Add a TODO</button>
                     </span>
         </div>
         <!-- /input-group -->
-        <button id="checkAll" class="btn btn-success" (click) = "setAllAsDone()">Mark all as done</button>
+        <button id="checkAll" class="btn btn-success" (click) = "setAllAsDone()">Mark all as <span *ngIf="this.show">done</span><span>Not done</span></button>
         <hr>
         <ul id="sortable" class="list-unstyled">
           <li class="ui-state-default" (mouseenter)="mouseMoved(todo.todoName)" *ngFor="let todo of todos">
             <div class="checkbox">
               <label >
-                <input #todoName type="checkbox" [(ngModel)]= "todo.status" value="" (click)="todoDone(todo.todoName)" />{{todo.todoName}}</label>
+                <input #todoName type="checkbox" [checked]="todo.status" value="" (click)="todoDone(todo.todoName, $event)" />{{todo.todoName}}</label>
                 <button *ngIf="alreadyDone === true" class="btn btn-info btn-xs">Mark as already done {{remainingTodos}}</button>
                </div>
           </li>
@@ -28,4 +68,7 @@
     </div>
 
   </div>
+
+
+  
 </div>

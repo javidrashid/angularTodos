@@ -30,11 +30,13 @@ export class TodosComponent implements OnInit {
     status : boolean = false;
     alreadyDone = false;
     remainingTodos: any;
+    showText : string
 
     constructor(private _todosService : TodoService) {}
 
     ngOnInit() : void{
         this.todos = this._todosService.getTodos();
+        this.remainingTodos = this.todos.length;
         console.info(this._todosService.getTodos());
         this._todosService.getTodos().forEach(function(elem, i) {
             var self = this;
@@ -50,12 +52,13 @@ export class TodosComponent implements OnInit {
         this.todos.push({todoName : this.todo, status: false});
         this.todo = '';
         var remainingTodos = 0;
-        this.remainingTodos = this.todos.forEach(function(elem , i) {
+        this.remainingTodos = this.todos.forEach((elem , i) => {
             if(elem.status === true) {
                 remainingTodos += 1;
             }
         });
         console.log(remainingTodos);
+        return this.remainingTodos;
     }
     mouseMoved(todo : Todo[]) {
         //console.log(todo);
@@ -72,32 +75,26 @@ export class TodosComponent implements OnInit {
          
     }
     todoDone(todo : Todo[]) {
-        console.log(this);
-        if(this.status === false) {
-            console.log('task is incomplete');
-           this.remainingTodos = this.todos.length - 1;
-            this.todos.forEach((elem, i) => {
-                if(elem.status === true) {
-                    this.remainingTodos -= 1;
-                }
-                else {
-                    this.remainingTodos = this.remainingTodos;
-                }
-            })
-           
-            //console.log(this.remainingTodos);
-        }
-        else {
-            console.log('completed');
-        }
-         return this.remainingTodos;
+        this.remainingTodos = this.todos.length;
+          console.log('task is incomplete');
+        this.todos.forEach((elem , i) => {
+            if(elem.status === true) {
+                this.remainingTodos -= 1;
+            }
+            else {
+                this.remainingTodos += 1;
+            }
+             
+        });
+ 
+        return this.remainingTodos;
     }
     setAllAsDone() {
-        console.log('sss');
-        this.todos.forEach(function(elem, i) {
-            console.log(elem);
-            elem.status = true;
-
-        })
-    }
+        if(this.todos.length === 4) {
+            
+            this.showText = "Done"
+        }
+        else {
+            this.showText = "Not Done"
+        }
 }
