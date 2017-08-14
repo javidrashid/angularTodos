@@ -6,7 +6,7 @@
         <div class="input-group">
           <input  [(ngModel)]="todo" class="form-control" placeholder="todo">
           <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" (click)="addAToDo(todoText)">Add a TODO + "{{remainingTodos}}" + {{2+6}}</button>
+                        <button class="btn btn-primary" type="button" (click)="addAToDo(todoText)">Add a TODO</button>
                     </span>
         </div>
         <!-- /input-group -->
@@ -16,13 +16,13 @@
           <li class="ui-state-default" (mouseenter)="mouseMoved(todo.todoName)" *ngFor="let todo of todos">
             <div class="checkbox">
               <label >
-                <input #todoName type="checkbox" [(ngModel)]= "todo.status" value="" (click)="todoDone(todo.todoName)" />{{todo.todoName}}</label>
+                <input #todoName type="checkbox" [(ngModel)]= "todo.status" value="" (change)="todoDone($event)" />{{todo.todoName}}</label>
                 <button *ngIf="alreadyDone === true" class="btn btn-info btn-xs">Mark as already done {{remainingTodos}}</button>
                </div>
           </li>
         </ul>
         <div class="todo-footer">
-          <strong><span class="count-todos"></span></strong> Items Left <span>{{remainingTodos || todos.length}}</span>
+          <strong><span class="count-todos"></span></strong> Items Left <span>{{remainingTodos}}</span>
         </div>
       </div>
     </div>

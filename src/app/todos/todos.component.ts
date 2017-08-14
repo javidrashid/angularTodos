@@ -29,68 +29,42 @@ export class TodosComponent implements OnInit {
     todoName: string;
     status : boolean = false;
     alreadyDone = false;
-    remainingTodos: any;
-
+    doneTodos: number;
+    remainingTodos: number;
     constructor(private _todosService : TodoService) {}
 
-    ngOnInit() : void{
+    ngOnInit() : void {
         this.todos = this._todosService.getTodos();
         console.info(this._todosService.getTodos());
-        this._todosService.getTodos().forEach(function(elem, i) {
-            var self = this;
-            var remainingTodos = 0;
-             if(elem.status === true) {
-                
-              remainingTodos += remainingTodos
-           }
-       })
+        this.doneTodos = 0;
+        this._todosService.getTodos().forEach((elem, i) =>
+             {
+                 if(elem.status === true) {
+                    this.doneTodos += 1;
+                }
+             }
+       )
+            this.remainingTodos = this.todos.length - this.doneTodos;
+           
     }
-    addAToDo(todo: Todo[]) : void {
+    addAToDo(todo: Todo[]) : Todo {
         console.log(todo);
         this.todos.push({todoName : this.todo, status: false});
         this.todo = '';
-        var remainingTodos = 0;
-        this.remainingTodos = this.todos.forEach(function(elem , i) {
-            if(elem.status === true) {
-                remainingTodos += 1;
-            }
-        });
-        console.log(remainingTodos);
+        this.remainingTodos++;
+        return this.todo;
     }
     mouseMoved(todo : Todo[]) {
-        //console.log(todo);
-        // var allTodos = this.todos;
-        // var self = this;
-        // var alreadyDone = false;
-        // allTodos.forEach(function(elem, i) {
-        //     //console.info(todo)
-        //     // if(allTodos[i].todoName == todo) {
-        //     //    self.alreadyDone = true;
-        //     // }
-        //     alreadyDone = false;
-        // })
-         
     }
-    todoDone(todo : Todo[]) {
+    todoDone(e, todo : Todo[]) {
         console.log(this);
-        if(this.status === false) {
-            console.log('task is incomplete');
-           this.remainingTodos = this.todos.length - 1;
-            this.todos.forEach((elem, i) => {
-                if(elem.status === true) {
-                    this.remainingTodos -= 1;
-                }
-                else {
-                    this.remainingTodos = this.remainingTodos;
-                }
-            })
-           
-            //console.log(this.remainingTodos);
-        }
+        if(e.target.checked) {
+            console.log('status is true and checked');
+           this.remainingTodos--;
+     }
         else {
-            console.log('completed');
+             this.remainingTodos++;
         }
-         return this.remainingTodos;
     }
     setAllAsDone() {
         console.log('sss');
@@ -98,6 +72,7 @@ export class TodosComponent implements OnInit {
             console.log(elem);
             elem.status = true;
 
-        })
+        });
+        this.remainingTodos = 0;
     }
 }
