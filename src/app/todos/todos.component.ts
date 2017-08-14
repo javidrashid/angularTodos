@@ -29,28 +29,36 @@ export class TodosComponent implements OnInit {
     todoName: string;
     status : boolean = false;
     alreadyDone = false;
+<<<<<<< HEAD
     remainingTodos: any;
     showText : string
 
+=======
+    doneTodos: number;
+    remainingTodos: number;
+>>>>>>> materialLIte
     constructor(private _todosService : TodoService) {}
 
-    ngOnInit() : void{
+    ngOnInit() : void {
         this.todos = this._todosService.getTodos();
         this.remainingTodos = this.todos.length;
         console.info(this._todosService.getTodos());
-        this._todosService.getTodos().forEach(function(elem, i) {
-            var self = this;
-            var remainingTodos = 0;
-             if(elem.status === true) {
-                
-              remainingTodos += remainingTodos
-           }
-       })
+        this.doneTodos = 0;
+        this._todosService.getTodos().forEach((elem, i) =>
+             {
+                 if(elem.status === true) {
+                    this.doneTodos += 1;
+                }
+             }
+       )
+            this.remainingTodos = this.todos.length - this.doneTodos;
+           
     }
-    addAToDo(todo: Todo[]) : void {
+    addAToDo(todo: Todo[]) : Todo {
         console.log(todo);
         this.todos.push({todoName : this.todo, status: false});
         this.todo = '';
+<<<<<<< HEAD
         var remainingTodos = 0;
         this.remainingTodos = this.todos.forEach((elem , i) => {
             if(elem.status === true) {
@@ -59,21 +67,14 @@ export class TodosComponent implements OnInit {
         });
         console.log(remainingTodos);
         return this.remainingTodos;
+=======
+        this.remainingTodos++;
+        return this.todo;
+>>>>>>> materialLIte
     }
     mouseMoved(todo : Todo[]) {
-        //console.log(todo);
-        // var allTodos = this.todos;
-        // var self = this;
-        // var alreadyDone = false;
-        // allTodos.forEach(function(elem, i) {
-        //     //console.info(todo)
-        //     // if(allTodos[i].todoName == todo) {
-        //     //    self.alreadyDone = true;
-        //     // }
-        //     alreadyDone = false;
-        // })
-         
     }
+<<<<<<< HEAD
     todoDone(todo : Todo[]) {
         this.remainingTodos = this.todos.length;
           console.log('task is incomplete');
@@ -97,4 +98,25 @@ export class TodosComponent implements OnInit {
         else {
             this.showText = "Not Done"
         }
+=======
+    todoDone(e, todo : Todo[]) {
+        console.log(this);
+        if(e.target.checked) {
+            console.log('status is true and checked');
+           this.remainingTodos--;
+     }
+        else {
+             this.remainingTodos++;
+        }
+    }
+    setAllAsDone() {
+        console.log('sss');
+        this.todos.forEach(function(elem, i) {
+            console.log(elem);
+            elem.status = true;
+
+        });
+        this.remainingTodos = 0;
+    }
+>>>>>>> materialLIte
 }
