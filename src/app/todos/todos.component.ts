@@ -29,14 +29,8 @@ export class TodosComponent implements OnInit {
     todoName: string;
     status : boolean = false;
     alreadyDone = false;
-<<<<<<< HEAD
-    remainingTodos: any;
-    showText : string
-
-=======
     doneTodos: number;
     remainingTodos: number;
->>>>>>> materialLIte
     constructor(private _todosService : TodoService) {}
 
     ngOnInit() : void {
@@ -58,47 +52,11 @@ export class TodosComponent implements OnInit {
         console.log(todo);
         this.todos.push({todoName : this.todo, status: false});
         this.todo = '';
-<<<<<<< HEAD
-        var remainingTodos = 0;
-        this.remainingTodos = this.todos.forEach((elem , i) => {
-            if(elem.status === true) {
-                remainingTodos += 1;
-            }
-        });
-        console.log(remainingTodos);
-        return this.remainingTodos;
-=======
         this.remainingTodos++;
         return this.todo;
->>>>>>> materialLIte
     }
     mouseMoved(todo : Todo[]) {
     }
-<<<<<<< HEAD
-    todoDone(todo : Todo[]) {
-        this.remainingTodos = this.todos.length;
-          console.log('task is incomplete');
-        this.todos.forEach((elem , i) => {
-            if(elem.status === true) {
-                this.remainingTodos -= 1;
-            }
-            else {
-                this.remainingTodos += 1;
-            }
-             
-        });
- 
-        return this.remainingTodos;
-    }
-    setAllAsDone() {
-        if(this.todos.length === 4) {
-            
-            this.showText = "Done"
-        }
-        else {
-            this.showText = "Not Done"
-        }
-=======
     todoDone(e, todo : Todo[]) {
         console.log(this);
         if(e.target.checked) {
@@ -118,5 +76,4 @@ export class TodosComponent implements OnInit {
         });
         this.remainingTodos = 0;
     }
->>>>>>> materialLIte
 }
