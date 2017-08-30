@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Todo } from "./todos"
-import { TodoService } from "./todos.service"
+import { TodoService } from "./todos.service";
 
 
-@Component({
+
+@Component({ 
     selector : 'todos',
     templateUrl : './todos.component.html',
     styleUrls : ['./todos.component.css' ],
@@ -33,20 +34,28 @@ export class TodosComponent implements OnInit {
     remainingTodos: number;
     constructor(private _todosService : TodoService) {}
 
-    ngOnInit() : void {
-        this.todos = this._todosService.getTodos();
-        this.remainingTodos = this.todos.length;
-        console.info(this._todosService.getTodos());
-        this.doneTodos = 0;
-        this._todosService.getTodos().forEach((elem, i) =>
-             {
-                 if(elem.status === true) {
-                    this.doneTodos += 1;
-                }
-             }
-       )
-            this.remainingTodos = this.todos.length - this.doneTodos;
+    // ngOnInit() : void {
+    //     this.todos = this._todosService.getTodos();
+    //     this.remainingTodos = this.todos.length;
+    //     console.info(this._todosService.getTodos());
+    //     this.doneTodos = 0;
+    //     this._todosService.getTodos().forEach((elem, i) =>
+    //          {
+    //              if(elem.status === true) {
+    //                 this.doneTodos += 1;
+    //             }
+    //          }
+    //    )
+    //         this.remainingTodos = this.todos.length - this.doneTodos;
            
+    // }
+
+    ngOnInit() {
+        this.todos = [];
+        this._todosService.getTodos()
+            .map(res => res.json())
+            .subscribe(todos => this.todos = todos)
+            //console.log(this.todos);
     }
     addAToDo(todo: Todo[]) : Todo {
         this.todos.push({todoName : this.todo, status: false});
