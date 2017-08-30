@@ -49,7 +49,6 @@ export class TodosComponent implements OnInit {
            
     }
     addAToDo(todo: Todo[]) : Todo {
-        console.log(todo);
         this.todos.push({todoName : this.todo, status: false});
         this.todo = '';
         this.remainingTodos++;
@@ -60,7 +59,6 @@ export class TodosComponent implements OnInit {
     todoDone(e, todo : Todo[]) {
         console.log(this);
         if(e.target.checked) {
-            console.log('status is true and checked');
            this.remainingTodos--;
      }
         else {
